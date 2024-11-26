@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Sekai.dao.TChainDataDao">
+
+    <insert id="save" parameterType="com.example.Sekai.entity.TChainData">
+        insert into
+            t_chain_data
+        (`from`,`to`,`content`,`hash_no`,`block_index`,`create_time`,`code`,`music_name`,`status`,`chain_status`)
+            values
+        (#{from},#{to},#{content},#{hashNo},#{blockIndex},#{createTime},#{code},#{musicName},#{status},#{chainStatus})
+    </insert>
+
+    <select id="queryByCode" parameterType="string" resultType="com.example.Sekai.entity.TChainData">
+        select * from t_chain_data where `code` = #{code} order by id desc
+    </select>
+
+    <update id="updateData" parameterType="com.example.Sekai.entity.TradeObject">
+        update t_chain_data set `block_index` = #{blockIndex},`chain_status` = "1" where hash_no = #{hashNo}
+    </update>
+
+
+
+</mapper>

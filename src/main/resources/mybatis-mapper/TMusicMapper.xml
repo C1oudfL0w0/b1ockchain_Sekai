@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Sekai.dao.TMusicDao">
+
+    <insert id="save" parameterType="com.example.Sekai.entity.TMusic">
+        insert into
+            t_music
+        (`music_name`,`album_name`,`artist_name`,`create_time`,`address`)
+            values
+        (#{musicName},#{albumName},#{artistName},#{createTime},#{address})
+    </insert>
+
+    <select id="queryAll" resultType="com.example.Sekai.entity.TMusic">
+        select * from t_music
+    </select>
+
+    <select id="queryById" parameterType="int" resultType="com.example.Sekai.entity.TMusic">
+        select * from t_music where `id` = #{id}
+    </select>
+
+    <select id="queryByName" parameterType="string" resultType="com.example.Sekai.entity.TMusic">
+        select * from t_music where `music_name` = #{musicName}
+    </select>
+
+
+</mapper>

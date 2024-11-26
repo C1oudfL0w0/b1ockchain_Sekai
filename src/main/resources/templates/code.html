@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <style>
+        .content {
+            width: 90%;
+            margin: 20px auto;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .header, .coBodyItem {
+            display: flex;
+            align-items: center;
+        }
+        .header {
+            background-color: #f8f8f9;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .coBodyItem {
+            padding: 20px 5px;
+            border-bottom: 1px solid #ccc;
+        }
+        .headerItem, .item {
+            text-align: center;
+            word-break: break-all;
+        }
+        .headerItem:not(:nth-child(4)) {
+            flex: 1;
+        }
+        .headerItem:nth-child(4) {
+            width: 40%;
+        }
+        .coBodyItem .item:not(:nth-child(4)) {
+            flex: 1;
+        }
+        .coBodyItem .item:nth-child(4) {
+            width: 40%;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+        .mask {
+            background-color: #000;
+            opacity: .8;
+            width: 100%;
+            height: 100%;
+        }
+        .modelBody {
+            width: 40%;
+            position: absolute;
+            z-index: 9;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .formItem {
+            display: flex;
+            margin: 15px 0;
+            align-items: center;
+        }
+        label {
+            width: 120px;
+        }
+        input {
+            flex: 1;
+            background-color: #fff;
+            background-image: none;
+            border-radius: 4px;
+            border: 1px solid #dcdfe6;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #606266;
+            display: inline-block;
+            font-size: inherit;
+            height: 40px;
+            line-height: 40px;
+            outline: none;
+            padding: 0 15px;
+            -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        }
+        .btn {
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #dcdfe6;
+            color: #606266;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin:0 20px;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+
+        }
+        .primary {
+            color: #fff;
+            background-color: #409eff;
+            border-color: #409eff;
+        }
+        .danger {
+            color: #fff;
+            background-color: #f56c6c;
+            border-color: #f56c6c;
+        }
+        .btnBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .item .btn {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal">
+    <div class="mask">
+    </div>
+    <div class="modelBody">
+        <div>提交至system</div>
+<!--        <div class="formItem"><label>流程名:</label> <input id="processName" name="processName" aria-label="流程名 "  placeholder="流程名"></div>-->
+<!--        <div class="formItem"><label>内容:</label> <input id="content" name="content" aria-label="流程内容 "  placeholder="流程内容"></div>-->
+        <div class="btnBox"><button class="btn danger" onclick="closeModal()">取消</button><button class="btn primary" onclick="handleConfirm()">提交</button></div>
+    </div>
+</div>
+<div class="content">
+    <div class="header">
+        <div class="headerItem">id</div>
+        <div class="headerItem">musicName</div>
+        <div class="headerItem">artistName</div>
+        <div class="headerItem">code</div>
+        <div class="headerItem">address</div>
+        <div class="headerItem">createTime</div>
+        <div class="headerItem">操作</div>
+    </div>
+    <div class="coBody">
+    </div>
+</div>
+
+</body>
+
+
+
+
+<script>
+    var params = new URLSearchParams(window.location.search);
+    var id = params.get('id');
+    var privateKey = params.get('privateKey');
+    // function downloadImg(url) {
+    //     fetch(url)
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok ' + response.statusText);
+    //             }
+    //             return response.blob(); // 将响应体转换为 Blob 对象
+    //         })
+    //         .then(blob => {
+    //             // 创建一个临时的 URL
+    //             const url = window.URL.createObjectURL(blob);
+    //             // 创建一个隐藏的 <a> 元素
+    //             const a = document.createElement('a');
+    //             a.style.display = 'none';
+    //             a.href = url;
+    //             a.download = '认证码.png'; // 设置下载的文件名
+    //             // 将 <a> 元素添加到文档中
+    //             document.body.appendChild(a);
+    //
+    //             // 触发点击事件
+    //             a.click();
+    //
+    //             // 清理：移除 <a> 元素并释放 URL 对象
+    //             document.body.removeChild(a);
+    //             window.URL.revokeObjectURL(url);
+    //         })
+    //         .catch(error => {
+    //             console.error('There has been a problem with your fetch operation:', error);
+    //         });
+    // }
+
+    let code
+    function showAddModal(str) {
+
+        $('.modal').show()
+        code = str+''
+    }
+    function  init() {
+        $.ajax({
+            url: '/queryAllCodeByMusicId', // API 的 URL 地址
+            type: 'POST', // 请求类型，可以是 GET, POST, PUT, DELETE 等
+            contentType: 'application/json',
+            data: JSON.stringify({
+                id,
+                privateKey
+            }),
+            success: function(data) {
+                // 在这里处理从服务器返回的数据
+                const { o } = data
+                let  html = ''
+                o.forEach(item=> {
+                    const str = `
+                        <div class="coBodyItem">
+                        <div class="item">${item.id}</div>
+                        <div class="item">${item.musicName}</div>
+                        <div class="item">${item.artistName}</div>
+                        <div class="item">${item.code}</div>
+                        <div class="item">${item.address}</div>
+                        <div class="item">${item.createTime}</div>
+                        <div class="item"><button class="btn danger" onclick="showAddModal('${item.code}')">提交到system</button><button class="btn primary" onclick="showAddModal('${item.code}')">用户交易</button></div>
+                    </div>`
+                    html += str
+                })
+
+                $('.coBody').html(html)
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 处理请求失败的情况
+                console.error('Error: ' + textStatus + ' ' + errorThrown);
+            }
+        });
+    }
+
+
+    let loading = false
+    function handleConfirm() {
+        if(loading) return
+        loading = true
+        const processName = $('#processName').val()
+        const content = $('#content').val()
+        $.ajax({
+            url: '/toChain', // API 的 URL 地址
+            type: 'POST', // 请求类型，可以是 GET, POST, PUT, DELETE 等
+            contentType: 'application/json',
+            data: JSON.stringify({
+                // processName,
+                // content,
+                privateKey,
+                code
+            }),
+            success: function(data) {
+                // 在这里处理从服务器返回的数据
+                const { code, msg } = data
+                if(code === '1') {
+                    closeModal()
+                    alert('新增成功')
+                } else  {
+                    alert(msg)
+                }
+                loading = false
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 处理请求失败的情况
+                console.error('Error: ' + textStatus + ' ' + errorThrown);
+                loading = false
+            }
+        });
+    }
+
+    function closeModal() {
+        $('#content').val('')
+        $('#processName').val('')
+        $('.modal').hide()
+    }
+
+    init()
+
+</script>
+
+</html>

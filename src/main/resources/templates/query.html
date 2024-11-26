@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>版权认证</title>
+  <script src="/js/jquery-3.7.1.min.js"></script>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  .container {
+    padding: 20px 5%;
+  }
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    border-radius: 4px;
+    border: 1px solid #ebeef5;
+    background-color: #fff;
+    overflow: hidden;
+    color: #303133;
+    transition: .3s;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    padding: 20px;
+  }
+  .musicItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  .process {
+    margin-top: 20px;
+  }
+  .processItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  .processItem:nth-child(even) {
+    align-items: end;
+  }
+
+  .processName {
+    padding:5px 10px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: fit-content;
+    font-size: 14px;
+  }
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+  }
+  .mask {
+    background-color: #000;
+    opacity: .8;
+    width: 100%;
+    height: 100%;
+  }
+  .modelBody {
+    width: 80%;
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .processModalItem {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+  }
+  .v {
+    word-break: break-all;
+    margin-left: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="modal" >
+    <div class="mask" onclick="closeModal()">
+    </div>
+    <div class="modelBody">
+      <div class="content processModalItem">
+        <div class="k">内容：</div>
+        <div class="v"></div>
+      </div>
+      <div class="hashNo processModalItem">
+        <div class="k">hash：</div>
+        <div class="v"></div>
+      </div>
+      <div class="blockIndex processModalItem">
+        <div class="k">区块号：</div>
+        <div class="v"></div>
+      </div>
+      <div class="createTime processModalItem">
+        <div class="k">创建时间：</div>
+        <div class="v"></div>
+      </div>
+      <div class="chainStatus processModalItem">
+        <div class="k">上链状态：</div>
+        <div class="v"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="music card">
+      <div class="title">
+        音乐信息
+      </div>
+      <div class="musicName musicItem">
+        <div class="k">音乐名：</div>
+        <div class="v"></div>
+      </div>
+      <div class="musicDesc musicItem">
+        <div class="k">音乐简介：</div>
+        <div class="v"></div>
+      </div>
+      <div class="createTime musicItem">
+        <div class="k">创建时间：</div>
+        <div class="v"></div>
+      </div>
+    </div>
+    <div class="card process">
+      <div class="title">
+        溯源流程
+      </div>
+      <div class="processBox">
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  var params = new URLSearchParams(window.location.search);
+  var code = params.get('code');
+
+  let processList = []
+  function  closeModal() {
+    $('.modal').hide()
+  }
+
+  function showDetail(i) {
+    const item = processList[i]
+    $('.modal').show()
+    $('.content .v').html(item.content)
+    $('.hashNo .v').html(item.hashNo)
+    $('.blockIndex .v').html(item.blockIndex)
+    $('.createTime .v').html(item.createTime)
+    $('.chainStatus .v').html(item.chainStatus === '0'? '未上链': '上链成功' )
+  }
+  function  init() {
+    $.ajax({
+      url: '/queryCode?code='+ code, // API 的 URL 地址
+      type: 'POST', // 请求类型，可以是 GET, POST, PUT, DELETE 等
+      success: function(data) {
+        // 在这里处理从服务器返回的数据
+        const { list , music } = data.o
+        processList = list
+        $('.musicName .v').html(music.musicName)
+        $('.musicDesc .v').html(music.musicDesc)
+        $('.createTime .v').html(music.createTime)
+        let html = ''
+        list.forEach((item,index)=> {
+          const str = `<div class="processItem">
+          <div>第${index + 1}步</div>
+          <div class="processName" onclick="showDetail(${index})">${item.processName}</div>
+        </div>`
+          html += str
+        })
+        $('.processBox').html(html)
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        // 处理请求失败的情况
+        console.error('Error: ' + textStatus + ' ' + errorThrown);
+      }
+    });
+  }
+
+  init()
+</script>
+</html>

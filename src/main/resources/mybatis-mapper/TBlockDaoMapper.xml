@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Sekai.dao.TBlockDao">
+
+
+    <select id="queryBlockInfo" resultType="com.example.Sekai.entity.block.BlockInfo">
+        select * from t_block where id = 1
+    </select>
+
+    <update id="updateBlock" parameterType="com.example.Sekai.entity.block.BlockInfo">
+        update t_block set blockIndex = #{blockIndex} , currentBlockIndex = #{currentBlockIndex} where id = 1
+    </update>
+
+
+</mapper>
