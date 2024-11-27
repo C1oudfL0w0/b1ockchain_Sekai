@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'OPPOSans';
+    src: url(../font/opposans_r.ttf) format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'OPPOSans';
+    src: url(../font/opposans_m.ttf) format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'OPPOSans';
+    src: url(../font/opposans_b.ttf) format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'OPPOSans';
+    src: url(../font/opposans_h.ttf) format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap
+}
+
+* {
+    font-family: 'OPPOSans', '思源黑体', '微软雅黑', sans-serif;
+}

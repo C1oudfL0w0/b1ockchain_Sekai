@@ -118,12 +118,12 @@ public class CodeController {
 
         List<TCode> list = codeDao.queryByName(tMusic.getMusicName());
 
-        if (list.size() == 0){
+        if (list.isEmpty() || list.get(0) == null){
             jo.setCode("-1");
             jo.setMsg("暂无数据");
             return new ResponseEntity<JSONObject>(jo, HttpStatus.OK);
         }
-        jo.setO(list);
+        jo.setO(list.get(0));
         jo.setCode("1");
         jo.setMsg("查询成功");
         return new ResponseEntity<JSONObject>(jo, HttpStatus.OK);

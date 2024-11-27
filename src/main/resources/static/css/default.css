@@ -1,0 +1,251 @@
+.appHeader {
+    background-color: #f8f8f9;
+    border-bottom: 1px solid #ccc;
+    padding: 18px 36px 16px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.appLogoBody {
+    display: flex;
+    align-items: center;
+}
+
+.appBackButton{
+    width: 28px;
+    height: 28px;
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+.appTitle{
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.appDescription{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.actionBody{
+    margin-right: -12px;
+}
+
+.content {
+    background: #fcfcfc;
+    border-radius: 12px;
+    box-shadow: 4px 8px 24px 0 rgba(0, 0, 0, 0.06);
+    padding: 0 0 16px 0;
+    margin: 24px 36px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background: #edf0f2;
+}
+
+.header, .coBodyItem {
+    display: flex;
+}
+
+.header {
+    border-bottom: 1px solid #ccc;
+    padding: 24px 16px;
+}
+
+.coBodyItem {
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    -webkit-transition: background-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: background-color .2s cubic-bezier(.645, .045, .355, 1);
+}
+
+.coBodyItem:nth-child(even) {
+    background: #f5f5f5;
+}
+
+.coBodyItem:hover {
+    background: #f0f2f5;
+}
+
+.coBodyItem.coBodyItemSelected {
+    background: #e8f1fa;
+}
+
+.headerItem {
+    font-weight: 600;
+}
+
+.headerItem, .item {
+    text-align: left;
+    word-break: break-all;
+    padding: 0 4px;
+}
+
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    display: none;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(8px);
+}
+
+.dialogBody {
+    width: 40%;
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 24px;
+    border-radius: 22px;
+}
+
+.dialogTitle {
+    padding-top: 4px;
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom: 2.4px;
+    letter-spacing: 0.012rem;
+}
+
+.dialogSubtitle {
+    font-size: 14px;
+    padding-bottom: 8px;
+}
+
+.formItem {
+    display: flex;
+    margin: 12px 0;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+input {
+    flex: 1;
+    align-self: stretch;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 8px;
+    border: 1px solid #c5cace;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 4px 12px 0 12px;
+    margin-top: 8px;
+    -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+}
+
+input:hover {
+    border: 1px solid #a6aaad;
+}
+
+input:hover + .inputHeader {
+    color: #a6aaad;
+}
+
+input:focus {
+    border: 1px solid #008cff;
+}
+
+input:focus + .inputHeader {
+    color: #008cff;
+}
+
+.inputHeader {
+    margin-left: 8px;
+    padding: 0 2.4px;
+    font-size: 12px;
+    color: #c5cace;
+    z-index: 2;
+    position: absolute;
+    background: #fff;
+    -webkit-transition: color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: color .2s cubic-bezier(.645, .045, .355, 1);
+}
+
+.btn {
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: none;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0 12px;
+    transition: .25s;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.btn:hover, .appBackButton:hover {
+    transform: scale(1.02);
+}
+
+.btn:active, .appBackButton:active {
+    transform: scale(0.98);
+}
+
+.primary {
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
+}
+
+.danger {
+    color: #fff;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+}
+
+.btnBox {
+    padding-top: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 -12px;
+}
+
+.btnBox .btn{
+    flex: 1;
+    width: inherit;
+}
+
+.item .btn {
+    margin: 5px 0;
+}

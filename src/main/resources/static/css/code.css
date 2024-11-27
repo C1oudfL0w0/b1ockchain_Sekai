@@ -1,0 +1,40 @@
+.authCodeBody{
+    padding: 32px 24px;
+}
+
+.authCodeTitle{
+    font-weight: 700;
+    text-align: center;
+}
+
+.authCode{
+    text-wrap: wrap;
+    font-weight: 800;
+    font-size: 36px;
+    padding: 4px 24px;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+    text-align: center;
+    letter-spacing: 0.012rem;
+}
+
+.codeSourceBody{
+    padding: 20px 28px;
+}
+
+.codeSourceBody tr{
+    text-align: left;
+}
+
+.codeSourceBody th, .codeSourceBody td{
+    padding: 8px;
+}
+
+.codeSourceBody th:nth-child(1), .codeSourceBody td:nth-child(1){
+    font-weight: 700;
+}
+
+.codeSourceBody th:nth-child(2), .codeSourceBody td:nth-child(2){
+    font-weight: 500;
+}
+

@@ -79,7 +79,7 @@
     padding: 20px;
     border-radius: 10px;
   }
-  .processModalItem {
+  .processDialogItem {
     display: flex;
     align-items: center;
     margin: 20px;
@@ -92,26 +92,26 @@
 </head>
 <body>
   <div class="modal" >
-    <div class="mask" onclick="closeModal()">
+    <div class="mask" onclick="closeDialog()">
     </div>
     <div class="modelBody">
-      <div class="content processModalItem">
+      <div class="content processDialogItem">
         <div class="k">内容：</div>
         <div class="v"></div>
       </div>
-      <div class="hashNo processModalItem">
+      <div class="hashNo processDialogItem">
         <div class="k">hash：</div>
         <div class="v"></div>
       </div>
-      <div class="blockIndex processModalItem">
+      <div class="blockIndex processDialogItem">
         <div class="k">区块号：</div>
         <div class="v"></div>
       </div>
-      <div class="createTime processModalItem">
+      <div class="createTime processDialogItem">
         <div class="k">创建时间：</div>
         <div class="v"></div>
       </div>
-      <div class="chainStatus processModalItem">
+      <div class="chainStatus processDialogItem">
         <div class="k">上链状态：</div>
         <div class="v"></div>
       </div>
@@ -150,7 +150,7 @@
   var code = params.get('code');
 
   let processList = []
-  function  closeModal() {
+  function  closeDialog() {
     $('.modal').hide()
   }
 

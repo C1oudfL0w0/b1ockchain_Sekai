@@ -1,0 +1,15 @@
+.headerItem:not(:nth-child(5)), .coBodyItem .item:not(:nth-child(5)) {
+    flex: 1;
+}
+
+.headerItem:nth-child(1), .coBodyItem .item:nth-child(1) {
+    flex: 0.5;
+}
+
+.headerItem:nth-child(5), .coBodyItem .item:nth-child(5) {
+    width: 30%;
+}
+
+.headerItem:nth-child(6), .coBodyItem .item:nth-child(6) {
+    flex: 1.2;
+}
